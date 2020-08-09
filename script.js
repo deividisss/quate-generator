@@ -1,7 +1,7 @@
 //Get Quate From API
 
 async function getQuote() {
-  const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+  const proxyUrl = "https://gentle-basin-85184.herokuapp.com/";
   const apiUrl =
     "http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json";
   try {
