@@ -13,7 +13,18 @@ async function getQuote() {
     const response = await fetch(proxyUrl + apiUrl);
     const data = await response.json();
 
-    authorText.innerText = data.quoteAuthor;
+    // If Author is blank, add 'Unknown'
+    if (data.quoteAuthor === "") {
+      authorText.innerText = "Unknwon";
+    } else {
+      authorText.innerText = data.quoteAuthor;
+    }
+    // Reduce font size for long quotes
+    if (data.quoteText.length > 120) {
+      quoteText.classList.add("long-quote");
+    } else {
+      quoteText.classList.remove("long-quote");
+    }
     quoteText.innerText = data.quoteText;
 
     console.log(data);
