@@ -17,6 +17,9 @@ function removeLoadingSpinner() {
   }
 }
 
+let errorsCounter = 0;
+let nErrRun = 0;
+
 //Get Quote From API
 async function getQuote() {
   showLoadingSpinner();
@@ -40,10 +43,21 @@ async function getQuote() {
       quoteText.classList.remove("long-quote");
     }
     quoteText.innerText = data.quoteText;
+
     // Stop Loader, Show Quote
     removeLoadingSpinner();
   } catch (error) {
-    getQuote();
+    errorsCounter++;
+
+    if (errorsCounter < 10) {
+      getQuote();
+      console.log("kaskas");
+    } else {
+      errorsCounter = 0;
+      removeLoadingSpinner();
+      alert("Error: Quote Generator API is Not working. Try Again Later");
+    }
+    console.log(errorsCounter);
     console.log("whoops, no quote", error);
   }
 }
